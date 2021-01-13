@@ -2,9 +2,10 @@ const express = require("express")
 const app = express()
 const mongoose = require("mongoose")
 const dotenv = require("dotenv")
+
 //Import Routes
-const authRoute = require("./routes/auth")
-const postRoute = require("./routes/privatePosts")
+const authRoute = require("./lib/routes/auth")
+const postRoute = require("./lib/routes/privatePosts")
 
 dotenv.config()
 
