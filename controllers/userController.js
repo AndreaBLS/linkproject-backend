@@ -50,3 +50,8 @@ exports.userLogin = async (req, res) => {
 /* exports.userLogout = async(req,res) =>{
 
 } */
+
+exports.userLogout = async (req, res) => {
+    res.setCookie("auth-token", "").send({ message: "logged out succesfully" })
+}
+

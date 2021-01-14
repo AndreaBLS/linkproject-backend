@@ -1,14 +1,5 @@
 const mongoose = require("mongoose")
 
-const mediaSchema = new mongoose.Schema({
-    img: {
-        type: String
-    },
-    url: {
-        type: String
-    }
-})
-
 const contentSchema = new mongoose.Schema({
     // temporary sketch
     userID: {
@@ -43,9 +34,8 @@ const contentSchema = new mongoose.Schema({
         type: Date,
         default: null
     },
-    media: {
-        type: mediaSchema,
-        default: {}
+    img: {
+        type: String
     }
 })
 

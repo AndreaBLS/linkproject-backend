@@ -28,23 +28,16 @@ const userSchema = new mongoose.Schema({
     },
     verified: {
         type: Boolean,
-        default: false,
+        default: false
     },
     followers: {
         type: Number,
         default: 0
     },
-    following: {
-        type: Number,
-        default: 0
-    },
-    creationDate: {
-        type: Date,
-        default: Date.now
-    },
-    editDate: {
-        type: Date
-    }
+    followedUsers: [{
+        type: mongoose.Schema.ObjectId,
+        ref: "User"
+    }]
 })
 
 module.exports = mongoose.model("User", userSchema)
