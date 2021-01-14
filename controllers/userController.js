@@ -3,7 +3,7 @@ const { registerValidation, loginValidation } = require("../middlewares/validato
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
 
-const userRegister = async (req, res) => {
+exports.userRegister = async (req, res) => {
     // validating data before creating user
     const { error } = registerValidation(req.body)
     if (error) return res.status(400).send(error.details[0].message)
@@ -18,7 +18,8 @@ const userRegister = async (req, res) => {
 
     //Create a new user
     const user = new User({
-        name: req.body.name,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
         email: req.body.email,
         password: hashedPassword
     })
@@ -30,7 +31,7 @@ const userRegister = async (req, res) => {
     }
 }
 
-const userLogin = async (req, res) => {
+exports.userLogin = async (req, res) => {
     const { error } = loginValidation(req.body)
     if (error) return res.status(400).send(error.details[0].message)
 
@@ -46,6 +47,6 @@ const userLogin = async (req, res) => {
     const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET)
     res.header("auth-token", token).send({ token: token, message: "login succesful!" })
 }
+/* exports.userLogout = async(req,res) =>{
 
-module.exports.userRegister = userRegister
-module.exports.userLogin = userLogin
+} */

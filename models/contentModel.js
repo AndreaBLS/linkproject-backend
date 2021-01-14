@@ -1,14 +1,11 @@
-const { number } = require("joi")
 const mongoose = require("mongoose")
 
 const mediaSchema = new mongoose.Schema({
     img: {
-        type: String,
-        required: false
+        type: String
     },
     url: {
-        type: String,
-        required: false
+        type: String
     }
 })
 
@@ -26,35 +23,28 @@ const contentSchema = new mongoose.Schema({
     creationDate: {
         type: Date,
         default: Date.now,
-        required: true
     },
-    updateDate: {
+    editDate: {
         type: Date,
-        default: "",
-        required: false
+        default: null
     },
     url: {
-        type: String,
-        required: false
+        type: String
     },
     likes: {
         type: Number,
-        default: 0,
-        required: false
+        default: 0
     },
     shares: {
         type: Number,
-        default: 0,
-        required: false
+        default: 0
     },
     expiringDate: {
         type: Date,
-        default: null,
-        required: false
+        default: null
     },
     media: {
         type: mediaSchema,
-        required: false,
         default: {}
     }
 })

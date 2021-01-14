@@ -1,10 +1,17 @@
 const router = require("express").Router()
-const User = require("../models/userModel")
-const verify = require("../middlewares/verifyToken")
+const {
+
+} = require("../controllers/")
+
+
+
+
+
+/* const verify = require("../middlewares/verifyToken")
 
 router.get("/", verify, (req, res) => {
     res.send({message: "Access to private data granted via login to user", userInfo: req.user})  
     /// infos for individual user User.findbyOne({_id: req.user})  
 })
 
-module.exports = router
+module.exports = router */

@@ -1,11 +1,13 @@
 const mongoose = require("mongoose")
 
 const userSchema = new mongoose.Schema({
-    name: {
+    firstName: {
         type: String,
-        required: true,
-        min: 3,
-        max: 30
+        required: true
+    },
+    lastName: {
+        type: String,
+        required: true
     },
     email: {
         type: String,
@@ -13,20 +15,24 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true,
-        min: 6,
-        max: 100
+        required: true
     },
     displayName: {
         type: String,
-        required: true,
-        min: 5,
-        max: 15
+    },
+    birthday: {
+        type: Date,
+    },
+    avatar: {
+        type: String
+    },
+    verified: {
+        type: Boolean,
+        default: false,
     },
     followers: {
         type: Number,
         default: 0
-        
     },
     following: {
         type: Number,
@@ -36,9 +42,8 @@ const userSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    updateDate: {
-        type: Date,
-        default: null 
+    editDate: {
+        type: Date
     }
 })
 
