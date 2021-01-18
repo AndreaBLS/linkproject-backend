@@ -6,6 +6,15 @@ const { userRegister, userLogin, userLogout, } = require("../controllers/userCon
 //auth
 router.post("/register", userRegister)
 router.post("/login", userLogin)
-router.get("/logout", userLogout)
+router.post("/logout", userLogout)
+
+
+router
+/*   .route('/:id')
+  .get(auth, getUser)
+  .delete(auth, deleteUser)
+  .patch(auth, upload.single('avatar'), updateUser); // updates my user profile
+// .patch(auth, upload.single('avatar'), upload.array("product_images"), updateUser) // updates my user profile */
+
 
 module.exports = router

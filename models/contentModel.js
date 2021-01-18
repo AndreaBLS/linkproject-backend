@@ -36,6 +36,10 @@ const contentSchema = new mongoose.Schema({
     },
     img: {
         type: String
+    },
+    isHidden: {
+        type: Boolean,
+        default: false
     }
 })
 

@@ -17,7 +17,7 @@ const {
 const { route } = require("./auth")
 
 router
-route("/")
+.route("/")
     .get((req, res) => {
         console.log(req.user._id)
     })

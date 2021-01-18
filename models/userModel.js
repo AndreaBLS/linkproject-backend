@@ -9,6 +9,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    userName: {
+        type: String
+/*         required: true */
+    },
     email: {
         type: String,
         required: true,
@@ -37,7 +41,13 @@ const userSchema = new mongoose.Schema({
     followedUsers: [{
         type: mongoose.Schema.ObjectId,
         ref: "User"
-    }]
+    }],
+    role: {
+        type: String,
+        enum: ['Admin', 'User'],
+        required: false,
+        default: 'User',
+    },
 })
 
 module.exports = mongoose.model("User", userSchema)
