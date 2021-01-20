@@ -15,7 +15,10 @@ exports.registerValidation = (data) => {
             .email(),
         password: Joi.string()
             .min(6)
-            .required()
+            .required(),
+        userName: Joi.string()
+            .min(3)
+            .required(),
     });
     return schema.validate(data)
 }

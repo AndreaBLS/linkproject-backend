@@ -10,7 +10,7 @@ exports.userRegister = async (req, res) => {
     if (error) return res.status(400).send(error.details[0].message)
 
     const emailExist = await User.findOne({ email: req.body.email })
-    if (emailExist) return res.status(400).send("Email already exists in our database")
+    if (emailExist) return res.status(400).send({ message: "Email already exists in our database" })
 
     const salt = await bcrypt.genSalt(10)
     const hashedPassword = await bcrypt.hash(req.body.password, salt)
@@ -24,7 +24,7 @@ exports.userRegister = async (req, res) => {
     })
     try {
         const savedUser = await user.save()
-        res.send({ user: user._id })
+        res.send({ user: savedUser._id })
     } catch (err) {
         res.status(400).send(err)
     }
@@ -37,10 +37,10 @@ exports.userLogin = async (req, res) => {
 
         const user = await User.findOne({ email: req.body.email })
 
-        if (!user) return res.status(400).send("Email not found,disclosing that information just for testing purposes")
+        if (!user) return res.status(400).send({ message: "Email not found,disclosing that information just for testing purposes" })
 
         const validPassword = await bcrypt.compare(req.body.password, user.password)
-        if (!validPassword) return res.status(400).send("Password is wrong,disclosing that information just for testing purposes")
+        if (!validPassword) return res.status(400).send({ message: "Password is wrong,disclosing that information just for testing purposes" })
 
         const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET) // .toString()
 

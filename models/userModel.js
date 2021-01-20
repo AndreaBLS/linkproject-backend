@@ -1,4 +1,6 @@
 const mongoose = require("mongoose")
+const jwt = require('jsonwebtoken');
+const dotenv = require("dotenv")
 
 const userSchema = new mongoose.Schema({
     firstName: {
@@ -10,8 +12,8 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     userName: {
-        type: String
-/*         required: true */
+        type: String,
+        required: true
     },
     email: {
         type: String,
@@ -50,4 +52,19 @@ const userSchema = new mongoose.Schema({
     },
 })
 
+/* userSchema.statics.findByToken = function (token) {
+    const User = this;
+    let decoded;
+
+    try {
+        decoded = jwt.verify(token, process.env.TOKEN_SECRET);
+    } catch (err) {
+        return;
+    }
+
+    return User.findOne({
+        _id: decoded._id,
+    });
+};
+ */
 module.exports = mongoose.model("User", userSchema)

@@ -4,10 +4,9 @@ const mongoose = require("mongoose")
 const dotenv = require("dotenv")
 const cookieParser = require("cookie-parser")
 const cors = require("cors")
+let frontendOrigin = 'http://localhost:4000'
 
 //Import Routes
-const authRouter = require("./routes/auth")
-const apiRouter = require("./routes/api")
 
 
 dotenv.config()
@@ -20,21 +19,22 @@ mongoose.connect(
 )
 
 //Middleware 
-app.use(express.json())
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-
-//cors
-let frontendOrigin = '*'
 app.use(
     cors({
         origin: [frontendOrigin], // HERE YOU CAN WHITELIST THE DOMAIN OF YOUR CLIENT
         credentials: true, // allow cookies from other origins
     })
 );
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
+//cors
 
 // Route Middlewares
+const authRouter = require("./routes/auth")
+const apiRouter = require("./routes/api")
+
 app.use("/auth", authRouter)
 app.use("/api", apiRouter)
 
