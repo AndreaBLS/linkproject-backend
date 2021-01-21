@@ -5,6 +5,7 @@ const dotenv = require("dotenv")
 const cookieParser = require("cookie-parser")
 const cors = require("cors")
 let frontendOrigin = 'http://localhost:4000'
+const port = 4000
 
 //Import Routes
 
@@ -38,4 +39,4 @@ const apiRouter = require("./routes/api")
 app.use("/auth", authRouter)
 app.use("/api", apiRouter)
 
-app.listen(3000, () => console.log("server up and running"))
+app.listen(port, () => console.log("server up and running"))

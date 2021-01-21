@@ -4,6 +4,7 @@ const auth = require("../middlewares/authenticator")
 
 const { getUser,
     updateUser,
+    deleteUser,
     getFollowers,
     getFollowing,
     followUser,
@@ -11,7 +12,7 @@ const { getUser,
 } = require("../controllers/userController")
 
 const {
-
+    createPost
 } = require("../controllers/postController")
 const { route } = require("./auth")
 const { upload, storage } = require("../controllers/awsUpload")
@@ -19,22 +20,22 @@ const { upload, storage } = require("../controllers/awsUpload")
 router
     .route('/:id')
     .get(auth, getUser)
-    .patch(auth, updateUser)
-/*     .delete(auth, deleteUser)
-    .patch(auth, upload.single('avatar'), updateUser); // updates my user profile
-// .patch(auth, upload.single('avatar'), upload.array("product_images"), updateUser) // updates my user profile 
- */
-
+    .patch(auth, /* upload.single('avatar'), */ updateUser)
+    .delete(auth, deleteUser)
 
 router
     .route('/:id/dashboard')
-    .get(auth, getUser)
-    .patch(auth, updateUser)
-module.exports = router
+    .get(auth, getUser,)
+    .patch(auth, updateUser, /*  getFollowers,       getFollowing */)
 
-/* router
+router
     .route('/:id/upload')
     .get(auth, getUser)
-    .post(upload) */
+    .post(/* upload */)
 
+router
+    .route('/:id/edit-post/')
+    .get(auth, getUser,)
+    .patch(auth, updateUser, /* getFollowers, getFollowing */)
 
+module.exports = router;

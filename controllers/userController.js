@@ -46,24 +46,18 @@ exports.userLogin = async (req, res) => {
 
         res
             .status(200)
-            .cookie('auth-token', token, {
+            .cookie("auth-token", token, {
                 expires: new Date(Date.now() + 604800000),
                 secure: false, // if we are not using https
                 httpOnly: true,
             })
-            /*         .send(user) */
             .send({
                 user: user, message: "login successful"
             })
     } catch (err) {
         res.send(err)
     }
-
-/*     res.header("auth-token", token).send({ token: token, message: "login succesful!" })
- */}
-/* exports.userLogout = async(req,res) =>{
-
-} */
+}
 
 exports.userLogout = async (req, res) => {
     res.setCookie("auth-token", "").send({ message: "logged out succesfully" })
@@ -100,3 +94,15 @@ exports.updateUser = async (req, res, next) => {
         next(e);
     }
 }
+
+exports.deleteUser = async (req, res, next) => {
+    try {
+        const user = await User.findByIdAndDelete(
+            req.params.id
+        );
+        if (!user) throw new createError.NotFound();
+        res.status(200).send(user).select('-password');
+    } catch (e) {
+        next(e);
+    }
+};
