@@ -24,6 +24,10 @@ router
     .delete(auth, deleteUser)
 
 router
+    .route('/:id/followers')
+    .get(auth, getFollowers)
+
+router
     .route('/:id/dashboard')
     .get(auth, getUser,)
     .patch(auth, updateUser, /*  getFollowers,       getFollowing */)
@@ -37,5 +41,7 @@ router
     .route('/:id/edit-post/')
     .get(auth, getUser,)
     .patch(auth, updateUser, /* getFollowers, getFollowing */)
+
+
 
 module.exports = router;

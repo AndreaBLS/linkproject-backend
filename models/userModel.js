@@ -36,10 +36,6 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    followers: {
-        type: Number,
-        default: 0
-    },
     followedUsers: [{
         type: mongoose.Schema.ObjectId,
         ref: "User"
@@ -56,19 +52,4 @@ userSchema.virtual('fullName').get(function () {
     return this.firstName + ' ' + this.lastName;
 });
 
-/* userSchema.statics.findByToken = function (token) {
-    const User = this;
-    let decoded;
-
-    try {
-        decoded = jwt.verify(token, process.env.TOKEN_SECRET);
-    } catch (err) {
-        return;
-    }
-
-    return User.findOne({
-        _id: decoded._id,
-    });
-};
- */
 module.exports = mongoose.model("User", userSchema)

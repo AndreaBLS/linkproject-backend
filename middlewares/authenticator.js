@@ -1,9 +1,9 @@
- const User = require('../models/userModel');
- const jwt = require("jsonwebtoken")
+const User = require('../models/userModel');
+const jwt = require("jsonwebtoken")
 
 
 module.exports = function (req, res, next) {
-    const token = req.cookies.token
+    const token = req.cookies.authToken || req.header.token
     if (!token) return res.status(401).send("Access Denied")
 
     try {

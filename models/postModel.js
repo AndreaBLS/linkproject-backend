@@ -6,7 +6,6 @@ const contentSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    // isPinned = pinned links
     isPinned: {
         type: Boolean,
         required: true,

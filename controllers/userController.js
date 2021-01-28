@@ -2,7 +2,7 @@ const User = require("../models/userModel")
 const { registerValidation, loginValidation } = require("../middlewares/validator")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
-const createError = require('http-errors')
+const createError = require("http-errors")
 
 exports.userRegister = async (req, res) => {
 
@@ -46,7 +46,7 @@ exports.userLogin = async (req, res) => {
 
         res
             .status(200)
-            .cookie("auth-token", token, {
+            .cookie("authToken", token, {
                 expires: new Date(Date.now() + 604800000),
                 secure: false, // if we are not using https
                 httpOnly: true,
@@ -82,7 +82,7 @@ exports.updateUser = async (req, res, next) => {
         const user = await User.findByIdAndUpdate(
             req.params.id,
             {
-                $set: { firstName, lastName, userName, avatar },
+                $set: { ...req.body },
             },
             {
                 new: true
@@ -102,6 +102,18 @@ exports.deleteUser = async (req, res, next) => {
         );
         if (!user) throw new createError.NotFound();
         res.status(200).send(user).select('-password');
+    } catch (e) {
+        next(e);
+    }
+};
+
+exports.getFollowers = async (req, res, next) => {
+    try {
+        const user = await User.findById(
+            req.params.id)
+            .populate("followedUsers")
+        if (!user) throw new createError.NotFound();
+        res.status(200).send(user.followedUsers).select('-password');
     } catch (e) {
         next(e);
     }
