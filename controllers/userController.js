@@ -60,7 +60,7 @@ exports.userLogin = async (req, res) => {
 }
 
 exports.userLogout = async (req, res) => {
-    res.setCookie("auth-token", "").send({ message: "logged out succesfully" })
+    res.setCookie("auth-token", "").send({ message: "logged out successfully" })
 }
 
 exports.getUser = async (req, res, next) => {
@@ -101,7 +101,19 @@ exports.deleteUser = async (req, res, next) => {
             req.params.id
         );
         if (!user) throw new createError.NotFound();
-        res.status(200).send(user).select('-password');
+        res.status(200).send(user)
+    } catch (e) {
+        next(e)
+    }
+};
+
+exports.followUser = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.params.id, {
+            $push: { followers: req.user.id }
+        })
+        if (!user) throw new createError.NotFound();
+        res.status(200).send({ message: "followed user" })
     } catch (e) {
         next(e);
     }
@@ -109,12 +121,22 @@ exports.deleteUser = async (req, res, next) => {
 
 exports.getFollowers = async (req, res, next) => {
     try {
-        const user = await User.findById(
-            req.params.id)
-            .populate("followedUsers")
+        const user = await User.findById(req.params.id)
+            .populate("followers")
         if (!user) throw new createError.NotFound();
-        res.status(200).send(user.followedUsers).select('-password');
+        res.status(200).send(user.followers)
     } catch (e) {
         next(e);
     }
 };
+
+exports.getFollowedUsers = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.params.id)
+            .populate("followedUsers")
+        if (!user) throw new createError.NotFound();
+        res.status(200).send(user.followedUsers)
+    } catch (e) {
+        next(e);
+    }
+}

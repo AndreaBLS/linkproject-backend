@@ -34,4 +34,3 @@ exports.loginValidation = (data) => {
     return schema.validate(data)
 }
 
-

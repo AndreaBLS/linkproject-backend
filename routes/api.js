@@ -12,7 +12,12 @@ const { getUser,
 } = require("../controllers/userController")
 
 const {
-    createPost
+    createPost,
+    getPosts,
+    getPost,
+    editPost,
+    toggleLike,
+    share
 } = require("../controllers/postController")
 const { route } = require("./auth")
 const { upload, storage } = require("../controllers/awsUpload")
@@ -24,13 +29,9 @@ router
     .delete(auth, deleteUser)
 
 router
-    .route('/:id/followers')
-    .get(auth, getFollowers)
-
-router
     .route('/:id/dashboard')
-    .get(auth, getUser,)
-    .patch(auth, updateUser, /*  getFollowers,       getFollowing */)
+    .get(auth, getUser,getFollowers)
+    .patch(auth, updateUser, )
 
 router
     .route('/:id/upload')

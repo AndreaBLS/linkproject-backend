@@ -21,14 +21,14 @@ const contentSchema = new mongoose.Schema({
     url: {
         type: String
     },
-    likes: {
-        type: Number,
-        default: 0
-    },
-    shares: {
-        type: Number,
-        default: 0
-    },
+    likes: [{
+        type: mongoose.Schema.ObjectId,
+        ref: "User"
+    }],
+    shares: [{
+        type: mongoose.Schema.ObjectId,
+        ref: "User"
+    }],
     expiringDate: {
         type: Date,
         default: null
