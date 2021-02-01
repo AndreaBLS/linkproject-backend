@@ -42,4 +42,4 @@ const contentSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model("content", userSchema)
+module.exports = mongoose.model("content", contentSchema)

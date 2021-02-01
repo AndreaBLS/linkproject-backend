@@ -24,7 +24,7 @@ exports.userRegister = async (req, res) => {
     })
     try {
         const savedUser = await user.save()
-        res.send({ user: savedUser._id })
+        res.send({ user: savedUser })
     } catch (err) {
         res.status(400).send(err)
     }

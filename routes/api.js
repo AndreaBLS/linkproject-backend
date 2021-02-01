@@ -30,8 +30,8 @@ router
 
 router
     .route('/:id/dashboard')
-    .get(auth, getUser,getFollowers)
-    .patch(auth, updateUser, )
+    .get(auth, getUser, getFollowers)
+    .patch(auth, updateUser,)
 
 router
     .route('/:id/upload')
@@ -42,7 +42,5 @@ router
     .route('/:id/edit-post/')
     .get(auth, getUser,)
     .patch(auth, updateUser, /* getFollowers, getFollowing */)
-
-
 
 module.exports = router;
