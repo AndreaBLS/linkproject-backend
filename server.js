@@ -4,7 +4,7 @@ const mongoose = require("mongoose")
 const dotenv = require("dotenv")
 const cookieParser = require("cookie-parser")
 const cors = require("cors")
-let frontendOrigin = 'http://localhost:4000'
+let frontendOrigin = 'http://localhost:3000'
 const port = 4000
 
 //Import Routes
