@@ -12,21 +12,11 @@ share */
 
 exports.createPost = async (req, res, next) => {
     try {
-        const post = new Post.save(req.body)
+        const userID = req.userID._id
+        const post = new Post(req.body)
         await post.save()
         if (!post) throw new createError.NotFound();
         res.status(200).send(post)
-    } catch (e) {
-        next(e);
-    }
-};
-
-exports.getPosts = async (req, res, next) => {
-    try {
-        const userID = req.user._id
-        const posts = await Post.find({ userID })
-        if (!post) throw new createError.NotFound();
-        res.status(200).send(posts)
     } catch (e) {
         next(e);
     }
@@ -59,13 +49,26 @@ exports.editPost = async (req, res, next) => {
     }
 };
 
-exports.share = async (req,res,next) => {
+exports.deletePost = async (req, res, next) => {
     try {
-        
-        if (!post) throw new createError.NotFound();
-        res.status(200).send(post)
+        const post = await User.findByIdAndDelete(
+            req.params.id
+        );
+        if (!user) throw new createError.NotFound();
+        res.status(200).send(user)
     } catch (e) {
-        next(e);
+        next(e)
     }
-}
+};
 
+exports.editPost = async (req, res, next) => {
+    try {
+        const post = await User.findByIdAndDelete(
+            req.params.id
+        );
+        if (!user) throw new createError.NotFound();
+        res.status(200).send(user)
+    } catch (e) {
+        next(e)
+    }
+};

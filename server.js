@@ -34,9 +34,11 @@ app.use(cookieParser());
 
 // Route Middlewares
 const authRouter = require("./routes/auth")
-const apiRouter = require("./routes/api")
+const userRouter = require("./routes/user")
+const postsRouter = require("./routes/posts")
 
 app.use("/auth", authRouter)
-app.use("/api", apiRouter)
+app.use("/user", userRouter)
+app.use("/posts", postsRouter)
 
 app.listen(port, () => console.log("server up and running"))

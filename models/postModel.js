@@ -1,14 +1,12 @@
 const mongoose = require("mongoose")
 
 const contentSchema = new mongoose.Schema({
-    // temporary sketch
     userID: {
         type: String,
         required: true,
     },
     isPinned: {
-        type: Boolean,
-        required: true,
+        type: Boolean
     },
     creationDate: {
         type: Date,
@@ -19,6 +17,9 @@ const contentSchema = new mongoose.Schema({
         default: null
     },
     url: {
+        type: String
+    },
+    text: {
         type: String
     },
     likes: [{

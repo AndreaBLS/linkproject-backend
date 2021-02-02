@@ -1,4 +1,6 @@
 const User = require("../models/userModel")
+const Post = require("../models/postModel")
+
 const { registerValidation, loginValidation } = require("../middlewares/validator")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
@@ -60,7 +62,7 @@ exports.userLogin = async (req, res) => {
 }
 
 exports.userLogout = async (req, res) => {
-    res.setCookie("auth-token", "").send({ message: "logged out successfully" })
+    res.setCookie("authToken", "").send({ message: "logged out successfully" })
 }
 
 exports.getUser = async (req, res, next) => {
@@ -140,3 +142,14 @@ exports.getFollowedUsers = async (req, res, next) => {
         next(e);
     }
 }
+
+exports.getPosts = async (req, res, next) => {
+    try {
+        const userID = req.userID._id
+        const posts = await Post.find({ userID })
+        if (!posts) throw new createError.NotFound();
+        res.status(200).send(posts)
+    } catch (e) {
+        next(e);
+    }
+};

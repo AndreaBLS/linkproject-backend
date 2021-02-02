@@ -1,26 +1,17 @@
 const router = require("express").Router()
 const User = require("../models/userModel")
+
 const auth = require("../middlewares/authenticator")
 
 const { getUser,
     updateUser,
     deleteUser,
     getFollowers,
+    getPosts,
     getFollowing,
     followUser,
     unfollowUser,
 } = require("../controllers/userController")
-
-const {
-    createPost,
-    getPosts,
-    getPost,
-    editPost,
-    toggleLike,
-    share
-} = require("../controllers/postController")
-const { route } = require("./auth")
-const { upload, storage } = require("../controllers/awsUpload")
 
 router
     .route('/:id')
@@ -30,17 +21,17 @@ router
 
 router
     .route('/:id/dashboard')
-    .get(auth, getUser, getFollowers)
+    .get(auth, getUser)
     .patch(auth, updateUser,)
+
+router
+    .route("/:id/posts")
+    .get(auth, getPosts)
 
 router
     .route('/:id/upload')
     .get(auth, getUser)
     .post(/* upload */)
 
-router
-    .route('/:id/edit-post/')
-    .get(auth, getUser,)
-    .patch(auth, updateUser, /* getFollowers, getFollowing */)
 
 module.exports = router;
