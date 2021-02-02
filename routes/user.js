@@ -20,18 +20,11 @@ router
     .delete(auth, deleteUser)
 
 router
-    .route('/:id/dashboard')
-    .get(auth, getUser)
-    .patch(auth, updateUser,)
-
-router
     .route("/:id/posts")
     .get(auth, getPosts)
 
 router
     .route('/:id/upload')
-    .get(auth, getUser)
     .post(/* upload */)
-
 
 module.exports = router;
