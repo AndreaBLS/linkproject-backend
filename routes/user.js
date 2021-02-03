@@ -8,7 +8,7 @@ const { getUser,
     deleteUser,
     getFollowers,
     getPosts,
-    getFollowing,
+    getFollowedUsers,
     followUser,
     unfollowUser,
 } = require("../controllers/userController")
@@ -16,15 +16,31 @@ const { getUser,
 router
     .route('/:id')
     .get(auth, getUser)
-    .patch(auth, /* upload.single('avatar'), */ updateUser)
+    .patch(auth, updateUser)
     .delete(auth, deleteUser)
 
 router
     .route("/:id/posts")
     .get(auth, getPosts)
 
-router
+/* router
     .route('/:id/upload')
-    .post(/* upload */)
+    .post(/* upload */
+
+router
+    .route("/:id/followers")
+    .get(auth, getFollowers)
+
+router
+    .route("/:id/followed")
+    .get(auth, getFollowedUsers)
+
+router
+    .route("/:id/followUser")
+    .patch(auth, followUser)
+
+router
+    .route("/:id/unfollowUser")
+    .patch(auth, unfollowUser)
 
 module.exports = router;

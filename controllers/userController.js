@@ -70,7 +70,6 @@ exports.getUser = async (req, res, next) => {
         const user = await User
             .findById(req.params.id)
             .select('-password -__v')
-        /*             .populate("") */
         if (!user) throw new createError.NotFound();
         res.status(200).send(user);
     } catch (e) {
@@ -120,6 +119,19 @@ exports.followUser = async (req, res, next) => {
         next(e);
     }
 };
+
+exports.unfollowUser = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.params.id, {
+            $pull: { followers: req.user.id },
+        })
+        if (!user) throw new createError.NotFound();
+        res.status(200).send({ message: "unfollowed user" })
+    } catch (e) {
+        next(e);
+    }
+}
+
 
 exports.getFollowers = async (req, res, next) => {
     try {
