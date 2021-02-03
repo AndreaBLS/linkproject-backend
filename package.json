@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "s3" : "nodemon s3test.js"
   },
   "author": "",
   "license": "ISC",
@@ -19,7 +20,8 @@
     "joi": "^17.3.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.7",
-    "multer": "^1.4.2"
+    "multer": "^1.4.2",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"

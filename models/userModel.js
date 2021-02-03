@@ -44,6 +44,10 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: "User"
     }],
+    sharedPosts: [{
+        type: mongoose.Schema.ObjectId,
+        ref: "Post"
+    }],
     role: {
         type: String,
         enum: ['Admin', 'User'],

@@ -75,9 +75,10 @@ exports.userLogout = async (req, res) => {
 }
 
 exports.getUser = async (req, res, next) => {
+    console.log(req.userID)
     try {
         const user = await User
-            .findById(req.params.id)
+            .findById(req.params.id || req.userID)
             .select('-password -__v')
         if (!user) throw new createError.NotFound();
         res.status(200).send(user);
@@ -92,7 +93,7 @@ exports.updateUser = async (req, res, next) => {
         const user = await User.findByIdAndUpdate(
             req.params.id,
             {
-                $set: { ...req.body },
+                $set: { ...req.body, avatar: req.awsFile }
             },
             {
                 new: true
@@ -103,6 +104,11 @@ exports.updateUser = async (req, res, next) => {
     } catch (e) {
         next(e);
     }
+
+    /*    const newUser = await User.findById(req.params.userId)
+       newUser.avatar = data.Location
+       await newUser.save()
+       res.send(newUser) */
 }
 
 exports.deleteUser = async (req, res, next) => {

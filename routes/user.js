@@ -13,6 +13,9 @@ const { getUser,
     unfollowUser,
 } = require("../controllers/userController")
 
+const multerUpload = require("../middlewares/multerUpload")
+const s3Upload = require("../middlewares/awsUpload")
+
 router
     .route('/:id')
     .get(auth, getUser)
@@ -23,10 +26,10 @@ router
     .route("/:id/posts")
     .get(auth, getPosts)
 
-/* router
+router
     .route('/:id/upload')
-    .post(/* upload */
-
+/*     .post(auth, multerUpload, s3Upload, updateUser)
+ */
 router
     .route("/:id/followers")
     .get(auth, getFollowers)
@@ -42,5 +45,7 @@ router
 router
     .route("/:id/unfollowUser")
     .patch(auth, unfollowUser)
+
+router.get("/me", auth, getUser)
 
 module.exports = router;

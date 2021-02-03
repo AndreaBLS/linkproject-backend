@@ -63,17 +63,19 @@ exports.deletePost = async (req, res, next) => {
     } catch (e) {
         next(e)
     }
-};
+}; */
 
 exports.sharePost = async (req, res, next) => {
+    console.log(req.params.id, req.body.userID)
     try {
-        const post = await User.findById(
-            req.params.id
+        const user = await User.findById(
+            req.body.userID
         );
         if (!user) throw new createError.NotFound();
-        res.status(200).send(user)
+        user.sharedPosts.push(req.params.id)
+        const savedUser = await user.save()
+        res.status(200).send(savedUser)
     } catch (e) {
         next(e)
     }
-}; */
-
+}; 

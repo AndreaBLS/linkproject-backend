@@ -1,7 +1,7 @@
 const router = require("express").Router()
 const Post = require("../models/postModel")
 const auth = require("../middlewares/authenticator")
-const { upload, storage } = require("../controllers/awsUpload")
+const { upload, storage } = require("../middlewares/awsUpload")
 
 
 const {
@@ -20,12 +20,12 @@ router
     .patch(auth, editPost)
     .delete(auth, deletePost)
 
-/* router
+ router
     .route('/:id/sharePost')
     .post(auth, sharePost)
 
-    
-    .patch(auth, toggleLike) */
+ /*    
+    .patch(auth, toggleLike)  */
 
 
 module.exports = router;
