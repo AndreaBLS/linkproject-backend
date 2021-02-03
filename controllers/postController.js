@@ -2,14 +2,6 @@ const mongoose = require("mongoose")
 const User = require("../models/userModel")
 const Post = require("../models/postModel")
 
-/* createPost,
-getPosts,
-getPost,
-editPost,
-deletePost,
-toggleLike,
-share */
-
 exports.createPost = async (req, res, next) => {
     try {
         const userID = req.userID._id
@@ -61,9 +53,21 @@ exports.deletePost = async (req, res, next) => {
     }
 };
 
-exports.editPost = async (req, res, next) => {
+/* exports.toggleLike = async (req, res, next) => {
     try {
-        const post = await User.findByIdAndDelete(
+        const post = await Post.findById(
+            req.params.id
+        );
+        if (!user) throw new createError.NotFound();
+        res.status(200).send()
+    } catch (e) {
+        next(e)
+    }
+};
+
+exports.sharePost = async (req, res, next) => {
+    try {
+        const post = await User.findById(
             req.params.id
         );
         if (!user) throw new createError.NotFound();
@@ -71,4 +75,5 @@ exports.editPost = async (req, res, next) => {
     } catch (e) {
         next(e)
     }
-};
+}; */
+

@@ -9,7 +9,7 @@ const {
     getPost,
     editPost,
     toggleLike,
-    share,
+    sharePost,
     deletePost
 } = require("../controllers/postController")
 
@@ -19,5 +19,13 @@ router
     .post(auth, createPost)
     .patch(auth, editPost)
     .delete(auth, deletePost)
+
+/* router
+    .route('/:id/sharePost')
+    .post(auth, sharePost)
+
+    
+    .patch(auth, toggleLike) */
+
 
 module.exports = router;
