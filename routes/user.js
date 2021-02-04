@@ -13,11 +13,11 @@ const { getUser,
     unfollowUser,
 } = require("../controllers/userController")
 
-const multerUpload = require("../middlewares/multerUpload")
-const s3Upload = require("../middlewares/awsUpload")
+const { multerUpload } = require("../middlewares/multerUpload")
+const { s3Upload } = require("../middlewares/awsUpload")
 
 router
-    .route('/:id')
+    .route("/:id")
     .get(auth, getUser)
     .patch(auth, updateUser)
     .delete(auth, deleteUser)
@@ -27,9 +27,9 @@ router
     .get(auth, getPosts)
 
 router
-    .route('/:id/upload')
-/*     .post(auth, multerUpload, s3Upload, updateUser)
- */
+    .route("/:id/upload")
+    .post(auth, multerUpload, s3Upload, updateUser)
+
 router
     .route("/:id/followers")
     .get(auth, getFollowers)

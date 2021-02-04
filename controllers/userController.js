@@ -7,7 +7,6 @@ const bcrypt = require("bcryptjs")
 const createError = require("http-errors")
 
 exports.userRegister = async (req, res) => {
-
     const { error } = registerValidation(req.body)
     if (error) return res.status(400).send(error.details[0].message)
 
@@ -48,10 +47,10 @@ exports.userLogin = async (req, res) => {
 
         const user = await User.findOne({ email: req.body.email })
 
-        if (!user) return res.status(400).send({ message: "Email not found,disclosing that information just for testing purposes" })
+        if (!user) return res.status(400).send({ message: "Please double check your login information" })
 
         const validPassword = await bcrypt.compare(req.body.password, user.password)
-        if (!validPassword) return res.status(400).send({ message: "Password is wrong,disclosing that information just for testing purposes" })
+        if (!validPassword) return res.status(400).send({ message: "Please double check your login information" })
 
         const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET) // .toString()
 
@@ -59,12 +58,10 @@ exports.userLogin = async (req, res) => {
             .status(200)
             .cookie("authToken", token, {
                 expires: new Date(Date.now() + 604800000),
-                secure: false, // if we are not using https
+                secure: false,
                 httpOnly: true,
             })
-            .send({
-                user: user, message: "login successful"
-            })
+            .send({ user: user })
     } catch (err) {
         res.send(err)
     }
@@ -99,16 +96,12 @@ exports.updateUser = async (req, res, next) => {
                 new: true
             }
         );
-        console.log(user)
+        console.log({user})
         res.status(200).send(user)
     } catch (e) {
         next(e);
     }
 
-    /*    const newUser = await User.findById(req.params.userId)
-       newUser.avatar = data.Location
-       await newUser.save()
-       res.send(newUser) */
 }
 
 exports.deleteUser = async (req, res, next) => {
@@ -146,7 +139,6 @@ exports.unfollowUser = async (req, res, next) => {
         next(e);
     }
 }
-
 
 exports.getFollowers = async (req, res, next) => {
     try {
