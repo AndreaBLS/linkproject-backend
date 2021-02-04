@@ -9,7 +9,7 @@ const s3 = new AWS.S3({
 })
 
 exports.s3Upload = async (req, res, next) => {
-    console.log(req.file)
+
     let myFile = req.file.originalname.split(".")
     const fileType = myFile[myFile.length - 1]
 

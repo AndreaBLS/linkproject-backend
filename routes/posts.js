@@ -16,16 +16,18 @@ const {
 router
     .route('/:id')
     .get(auth, getPost)
-    .post(auth, createPost)
+
     .patch(auth, editPost)
     .delete(auth, deletePost)
 
- router
+router.route("/").post(auth, createPost)
+
+router
     .route('/:id/sharePost')
     .post(auth, sharePost)
 
- /*    
-    .patch(auth, toggleLike)  */
+/*    
+   .patch(auth, toggleLike)  */
 
 
 module.exports = router;

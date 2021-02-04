@@ -5,6 +5,7 @@ const Post = require("../models/postModel")
 exports.createPost = async (req, res, next) => {
     try {
         const userID = req.userID._id
+        console.log(req.userID)
         const post = new Post(req.body)
         await post.save()
         if (!post) throw new createError.NotFound();
