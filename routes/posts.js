@@ -16,7 +16,6 @@ const {
 router
     .route('/:id')
     .get(auth, getPost)
-
     .patch(auth, editPost)
     .delete(auth, deletePost)
 

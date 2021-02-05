@@ -68,7 +68,7 @@ exports.userLogin = async (req, res) => {
 }
 
 exports.userLogout = async (req, res) => {
-    res.setCookie("authToken", "").send({ message: "logged out successfully" })
+    res.cookie("authToken", "").send({ message: "logged out successfully" })
 }
 
 exports.getUser = async (req, res, next) => {
@@ -96,7 +96,7 @@ exports.updateUser = async (req, res, next) => {
                 new: true
             }
         );
-        console.log({user})
+        console.log({ user })
         res.status(200).send(user)
     } catch (e) {
         next(e);
