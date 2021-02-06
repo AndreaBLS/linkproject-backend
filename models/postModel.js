@@ -22,6 +22,9 @@ const contentSchema = new mongoose.Schema({
     text: {
         type: String
     },
+    description: {
+        type: String
+    },
     likes: [{
         type: mongoose.Schema.ObjectId,
         ref: "User"
@@ -34,7 +37,7 @@ const contentSchema = new mongoose.Schema({
         type: Date,
         default: null
     },
-    img: {
+    image: {
         type: String
     },
     isHidden: {

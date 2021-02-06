@@ -9,7 +9,6 @@ const port = 4000
 
 //Import Routes
 
-
 dotenv.config()
 
 //connect to DB

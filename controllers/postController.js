@@ -5,8 +5,10 @@ const Post = require("../models/postModel")
 exports.createPost = async (req, res, next) => {
     try {
         const userID = req.userID._id
-        console.log(req.userID)
+      /*   console.log(req.userID) */
         const post = new Post(req.body)
+        console.log(req.body)
+        //img: req.awsFile
         await post.save()
         if (!post) throw new createError.NotFound();
         res.status(200).send(post)
@@ -56,11 +58,14 @@ exports.deletePost = async (req, res, next) => {
 
 exports.toggleLike = async (req, res, next) => {
     try {
-        const post = await Post.findById(
+        const user = await Post.findById(
             req.params.id
         );
         if (!user) throw new createError.NotFound();
+
+        if (post) post.likes.pull(req.body.userID)
         post.likes.push(req.body.userID)
+
         const updatedPost = await post.save()
         res.status(200).send(updatedPost)
     } catch (e) {

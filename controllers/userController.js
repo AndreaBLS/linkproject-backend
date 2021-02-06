@@ -118,9 +118,9 @@ exports.deleteUser = async (req, res, next) => {
 
 exports.followUser = async (req, res, next) => {
     try {
-        const user = await User.findById(req.params.id, {
-            $push: { followers: req.user.id }
-        })
+        const user = await User.findById(req.params.id)
+        user.followers.push(req.body.id)
+        const updatedUser = await user.save()
         if (!user) throw new createError.NotFound();
         res.status(200).send({ message: "followed user" })
     } catch (e) {
@@ -130,9 +130,9 @@ exports.followUser = async (req, res, next) => {
 
 exports.unfollowUser = async (req, res, next) => {
     try {
-        const user = await User.findById(req.params.id, {
-            $pull: { followers: req.user.id },
-        })
+        const user = await User.findById(req.params.id)
+        user.followers.pull(req.body.id)
+        const updatedUser = await user.save()
         if (!user) throw new createError.NotFound();
         res.status(200).send({ message: "unfollowed user" })
     } catch (e) {

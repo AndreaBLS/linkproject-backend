@@ -10,6 +10,7 @@ const s3 = new AWS.S3({
 
 exports.s3Upload = async (req, res, next) => {
 
+    console.log(req)
     let myFile = req.file.originalname.split(".")
     const fileType = myFile[myFile.length - 1]
 
@@ -20,7 +21,6 @@ exports.s3Upload = async (req, res, next) => {
     }
     try {
         s3.upload(params, (err, data) => {
-
             req.awsFile = data.Location
             next()
         })

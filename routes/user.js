@@ -19,7 +19,7 @@ const { s3Upload } = require("../middlewares/awsUpload")
 router
     .route("/:id")
     .get(auth, getUser)
-    .patch(auth, updateUser)
+    .patch(auth, updateUser) 
     .delete(auth, deleteUser)
 
 router
