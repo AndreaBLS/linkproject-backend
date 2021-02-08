@@ -29,12 +29,13 @@ exports.userRegister = async (req, res) => {
     try {
         const savedUser = await user.save()
         res
-            .send({ user: savedUser })
             .cookie("authToken", token, {
                 expires: new Date(Date.now() + 604800000),
                 secure: false, // if we are not using https
                 httpOnly: true,
             })
+            .send({ user: savedUser })
+
     } catch (err) {
         res.status(400).send(err)
     }

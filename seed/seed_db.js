@@ -27,7 +27,6 @@ mongoose.connection.on('open', () => {
     console.log(`Connected to the database...`);
 });
 
-
 (async function () {
     /** CONNECT TO MONGO */
     console.log(`First, i will delete all the old users`);
