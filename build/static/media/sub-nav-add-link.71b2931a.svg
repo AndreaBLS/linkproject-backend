@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="41" height="41" viewBox="0 0 41 41">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #2e65d5;
+      }
+
+      .cls-2 {
+        fill: #f6f6f7;
+      }
+    </style>
+  </defs>
+  <g id="Gruppe_55" data-name="Gruppe 55" transform="translate(-447 -1341)">
+    <path id="sub-nav-bg" class="cls-1" d="M20.5,0A20.5,20.5,0,1,1,0,20.5,20.5,20.5,0,0,1,20.5,0Z" transform="translate(447 1341)"/>
+    <g id="plus-close" transform="translate(463 1357)">
+      <path id="Pfad_1" data-name="Pfad 1" class="cls-2" d="M1.392-3.919V.227H-.515V-3.919H-4.562V-5.711H-.515V-9.773H1.392v4.063H5.438v1.792Z" transform="translate(4.562 9.773)"/>
+    </g>
+  </g>
+</svg>

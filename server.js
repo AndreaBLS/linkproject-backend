@@ -4,6 +4,7 @@ const mongoose = require("mongoose")
 const dotenv = require("dotenv")
 const cookieParser = require("cookie-parser")
 const cors = require("cors")
+const path = require('path'); 
 let frontendOrigin = 'http://localhost:3000'
 const port = 4000
 
@@ -28,8 +29,13 @@ app.use(
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'build')));
 
-//cors
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 
 // Route Middlewares
 const authRouter = require("./routes/auth")
